@@ -3,11 +3,17 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { FaFacebook, FaInstagram, FaGlobe, FaLinkedin, FaThreads } from "react-icons/fa6";
 
 interface Volunteer {
   id: string;
   name: string;
   designation: string;
+  facebook?: string;
+  instagram?: string;
+  website?: string;
+  linkedin?: string;
+  threads?: string;
 }
 
 interface VolunteersData {
@@ -22,7 +28,7 @@ export default function VolunteersPage() {
   useEffect(() => {
     const fetchVolunteers = async () => {
       try {
-        const response = await fetch('/data/2025/volunteers.json');
+        const response = await fetch("/data/2025/volunteers.json");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -30,11 +36,11 @@ export default function VolunteersPage() {
         if (data && data.volunteers && Array.isArray(data.volunteers)) {
           setVolunteers(data.volunteers);
         } else {
-          console.error('Invalid data structure:', data);
+          console.error("Invalid data structure:", data);
           setVolunteers([]);
         }
       } catch (error) {
-        console.error('Error fetching volunteers:', error);
+        console.error("Error fetching volunteers:", error);
         setVolunteers([]);
       } finally {
         setLoading(false);
@@ -56,18 +62,12 @@ export default function VolunteersPage() {
         <div className="hidden md:block bg-white/90 backdrop-blur-lg rounded-full px-8 py-4 shadow-xl border border-white/20">
           <ul className="flex items-center space-x-8 text-sm font-medium text-gray-700">
             <li>
-              <Link
-                href="/"
-                className="hover:text-blue-600 transition-colors"
-              >
+              <Link href="/" className="hover:text-blue-600 transition-colors">
                 হোম
               </Link>
             </li>
             <li>
-              <Link
-                href="/volunteers"
-                className="text-blue-600 font-semibold"
-              >
+              <Link href="/volunteers" className="text-blue-600 font-semibold">
                 সেচ্ছাসেবক
               </Link>
             </li>
@@ -187,7 +187,8 @@ export default function VolunteersPage() {
             🤝 আমাদের সেচ্ছাসেবকগণ
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed">
-            <strong>২০২৫</strong> সালে আমাদের সাথে যুক্ত দানশীল ও আত্মত্যাগী সেচ্ছাসেবকদের পরিচয়
+            <strong>২০২৫</strong> সালে আমাদের সাথে যুক্ত দানশীল ও আত্মত্যাগী
+            সেচ্ছাসেবকদের পরিচয়
           </p>
         </div>
       </section>
@@ -201,9 +202,10 @@ export default function VolunteersPage() {
                 🌟 সামাজিক প্রভাব ও দায়বদ্ধতা
               </h2>
               <p className="text-base md:text-lg text-gray-600 leading-relaxed">
-                আমাদের সেচ্ছাসেবকগণ কেবল শিক্ষা প্রদানই করেন না, বরং তারা প্রতিটি শিশুর জীবনে 
-                একটি ইতিবাচক পরিবর্তন আনেন। তাদের নিঃস্বার্থ সেবা ও আত্মত্যাগের মাধ্যমে 
-                সুবিধাবঞ্চিত শিশুরা আশার আলো খুঁজে পায়।
+                আমাদের সেচ্ছাসেবকগণ কেবল শিক্ষা প্রদানই করেন না, বরং তারা
+                প্রতিটি শিশুর জীবনে একটি ইতিবাচক পরিবর্তন আনেন। তাদের নিঃস্বার্থ
+                সেবা ও আত্মত্যাগের মাধ্যমে সুবিধাবঞ্চিত শিশুরা আশার আলো খুঁজে
+                পায়।
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3 md:gap-4">
@@ -211,8 +213,12 @@ export default function VolunteersPage() {
                     <span className="text-sm md:text-lg">💡</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">শিক্ষার মান উন্নয়ন</h3>
-                    <p className="text-gray-600 text-sm md:text-base">প্রতিটি শিশু উন্নত মানের শিক্ষা পাওয়ার অধিকার রাখে</p>
+                    <h3 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">
+                      শিক্ষার মান উন্নয়ন
+                    </h3>
+                    <p className="text-gray-600 text-sm md:text-base">
+                      প্রতিটি শিশু উন্নত মানের শিক্ষা পাওয়ার অধিকার রাখে
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 md:gap-4">
@@ -220,8 +226,12 @@ export default function VolunteersPage() {
                     <span className="text-sm md:text-lg">🤝</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">সামাজিক দায়বদ্ধতা</h3>
-                    <p className="text-gray-600 text-sm md:text-base">সমাজের প্রতিটি সদস্যের কল্যাণে অবদান রাখা</p>
+                    <h3 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">
+                      সামাজিক দায়বদ্ধতা
+                    </h3>
+                    <p className="text-gray-600 text-sm md:text-base">
+                      সমাজের প্রতিটি সদস্যের কল্যাণে অবদান রাখা
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 md:gap-4">
@@ -229,8 +239,12 @@ export default function VolunteersPage() {
                     <span className="text-sm md:text-lg">🎯</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">ভবিষ্যৎ নেতৃত্ব</h3>
-                    <p className="text-gray-600 text-sm md:text-base">আগামীর নেতা তৈরিতে গুরুত্বপূর্ণ ভূমিকা পালন</p>
+                    <h3 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">
+                      ভবিষ্যৎ নেতৃত্ব
+                    </h3>
+                    <p className="text-gray-600 text-sm md:text-base">
+                      আগামীর নেতা তৈরিতে গুরুত্বপূর্ণ ভূমিকা পালন
+                    </p>
                   </div>
                 </div>
               </div>
@@ -240,7 +254,7 @@ export default function VolunteersPage() {
                 🎁 সেচ্ছাসেবা করার উপকারিতা
               </h2>
               <p className="text-base md:text-lg text-gray-600 leading-relaxed">
-                সেচ্ছাসেবা শুধু অন্যদের উপকার করে না, এটি নিজের ব্যক্তিত্ব ও 
+                সেচ্ছাসেবা শুধু অন্যদের উপকার করে না, এটি নিজের ব্যক্তিত্ব ও
                 দক্ষতা বিকাশেও সহায়তা করে।
               </p>
               <div className="space-y-4">
@@ -249,8 +263,12 @@ export default function VolunteersPage() {
                     <span className="text-sm md:text-lg">🧠</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">দক্ষতা বৃদ্ধি</h3>
-                    <p className="text-gray-600 text-sm md:text-base">নেতৃত্ব, যোগাযোগ ও সমস্যা সমাধানের দক্ষতা</p>
+                    <h3 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">
+                      দক্ষতা বৃদ্ধি
+                    </h3>
+                    <p className="text-gray-600 text-sm md:text-base">
+                      নেতৃত্ব, যোগাযোগ ও সমস্যা সমাধানের দক্ষতা
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 md:gap-4">
@@ -258,8 +276,12 @@ export default function VolunteersPage() {
                     <span className="text-sm md:text-lg">❤️</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">মানসিক প্রশান্তি</h3>
-                    <p className="text-gray-600 text-sm md:text-base">অন্যের সেবা করে অভূতপূর্ব আনন্দ ও তৃপ্তি লাভ</p>
+                    <h3 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">
+                      মানসিক প্রশান্তি
+                    </h3>
+                    <p className="text-gray-600 text-sm md:text-base">
+                      অন্যের সেবা করে অভূতপূর্ব আনন্দ ও তৃপ্তি লাভ
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 md:gap-4">
@@ -267,8 +289,12 @@ export default function VolunteersPage() {
                     <span className="text-sm md:text-lg">🌐</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">নেটওয়ার্কিং</h3>
-                    <p className="text-gray-600 text-sm md:text-base">সমমনা ব্যক্তিদের সাথে দীর্ঘমেয়াদী সম্পর্ক</p>
+                    <h3 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">
+                      নেটওয়ার্কিং
+                    </h3>
+                    <p className="text-gray-600 text-sm md:text-base">
+                      সমমনা ব্যক্তিদের সাথে দীর্ঘমেয়াদী সম্পর্ক
+                    </p>
                   </div>
                 </div>
               </div>
@@ -285,7 +311,7 @@ export default function VolunteersPage() {
               👥 ২০২৫ সালের সেচ্ছাসেবক দল
             </h2>
             <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              আমাদের নিবেদিতপ্রাণ সেচ্ছাসেবকগণ যারা শিশুদের উন্নত ভবিষ্যত গড়তে 
+              আমাদের নিবেদিতপ্রাণ সেচ্ছাসেবকগণ যারা শিশুদের উন্নত ভবিষ্যত গড়তে
               নিরলসভাবে কাজ করে যাচ্ছেন।
             </p>
           </div>
@@ -309,7 +335,7 @@ export default function VolunteersPage() {
                       className="object-cover"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
-                        target.src = '/photos/slide.jpg'; // Fallback image
+                        target.src = "/photos/slide.jpg"; // Fallback image
                       }}
                     />
                   </div>
@@ -337,6 +363,34 @@ export default function VolunteersPage() {
                         আইডি: {volunteer.id}
                       </p>
                     </a>
+                    {/* Social Media Links */}
+                    <div className="flex justify-center gap-3 mt-3">
+                      {volunteer.facebook && (
+                        <a href={volunteer.facebook} target="_blank" rel="noopener noreferrer" title="Facebook" className="text-blue-600 hover:text-blue-800 text-xl">
+                          <FaFacebook />
+                        </a>
+                      )}
+                      {volunteer.instagram && (
+                        <a href={volunteer.instagram} target="_blank" rel="noopener noreferrer" title="Instagram" className="text-pink-500 hover:text-pink-700 text-xl">
+                          <FaInstagram />
+                        </a>
+                      )}
+                      {volunteer.website && (
+                        <a href={volunteer.website} target="_blank" rel="noopener noreferrer" title="Website" className="text-gray-700 hover:text-gray-900 text-xl">
+                          <FaGlobe />
+                        </a>
+                      )}
+                      {volunteer.linkedin && (
+                        <a href={volunteer.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn" className="text-blue-700 hover:text-blue-900 text-xl">
+                          <FaLinkedin />
+                        </a>
+                      )}
+                      {volunteer.threads && (
+                        <a href={volunteer.threads} target="_blank" rel="noopener noreferrer" title="Threads" className="text-black hover:text-gray-700 text-xl">
+                          <FaThreads />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -344,7 +398,9 @@ export default function VolunteersPage() {
           ) : (
             <div className="flex justify-center items-center py-20">
               <div className="text-center">
-                <p className="text-xl text-gray-600 mb-4">কোনো সেচ্ছাসেবক পাওয়া যায়নি</p>
+                <p className="text-xl text-gray-600 mb-4">
+                  কোনো সেচ্ছাসেবক পাওয়া যায়নি
+                </p>
                 <p className="text-gray-500">দয়া করে পরে আবার চেষ্টা করুন</p>
               </div>
             </div>
@@ -354,20 +410,35 @@ export default function VolunteersPage() {
 
       {/* Call to Action Section */}
       <section className="py-20 px-4 bg-blue-600">
-        <div className="max-w-4xl mx-auto text-center text-white">
+        <div className="max-w-4xl mx-auto text-center rounded-2xl text-white">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
             🌟 আপনিও যুক্ত হন
           </h2>
           <p className="text-lg md:text-xl leading-relaxed mb-8">
-            আমাদের সেচ্ছাসেবক দলে যোগ দিয়ে শিশুদের জীবনে ইতিবাচক পরিবর্তন আনুন। 
+            আমাদের সেচ্ছাসেবক দলে যোগ দিয়ে শিশুদের জীবনে ইতিবাচক পরিবর্তন আনুন।
             একসাথে গড়ি একটি উন্নত সমাজ।
           </p>
-          <div className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-50 transition-colors cursor-pointer">
-            <span>যোগাযোগ করুন</span>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </div>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdg_3OlscdK6A5OazMQdM7UiroR-8ugnzGy92y23k4uaPBd6w/viewform?pli=1"
+            target="_blank"
+          >
+            <div className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-50 transition-colors cursor-pointer">
+              <span>যোগাযোগ করুন</span>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </div>
+          </a>
         </div>
       </section>
 
